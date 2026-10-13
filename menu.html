@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menu</title>
+<style>
+:root{--bg:#121212;--card:#1b1b1b;--tx:#f4f1ea;--mut:#a9a49a;--gold:#e8b86a;--line:#3a3a3a;--red:#c8332b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#faf7f1;--card:#fff;--tx:#1c1a17;--mut:#6f6a60;--gold:#9a6a12;--line:#ddd5c5}}
+:root[data-theme="light"]{--bg:#faf7f1;--card:#fff;--tx:#1c1a17;--mut:#6f6a60;--gold:#9a6a12;--line:#ddd5c5}
+:root[data-theme="dark"]{--bg:#121212;--card:#1b1b1b;--tx:#f4f1ea;--mut:#a9a49a;--gold:#e8b86a;--line:#3a3a3a}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 "Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:28px 18px 8px;max-width:640px;margin:auto}
+h1{margin:0;font-size:2rem;font-weight:800;letter-spacing:-.02em;color:var(--gold)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:8px;overflow-x:auto;padding:10px 18px}
+nav a{flex:none;color:var(--tx);text-decoration:none;font-size:.85rem;font-weight:600;padding:6px 12px;border:1px solid var(--line);border-radius:99px}
+nav a:focus-visible,nav a:hover{border-color:var(--gold);color:var(--gold);outline:none}
+main{max-width:640px;margin:auto;padding:0 18px 40px}
+section{padding-top:26px}
+h2{margin:0 0 6px;font-size:1.35rem;color:var(--gold)}
+h3{margin:18px 0 4px;font-size:1rem;color:var(--mut);font-weight:600}
+.it{display:flex;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px dotted var(--line)}
+.it b{font-weight:700}.it small{display:block;color:var(--mut);font-size:.8rem;font-weight:400}
+.it .n{flex:1}.it .p{font-weight:800;color:var(--gold);white-space:nowrap}
+.pp{display:flex;gap:6px}.pp span{font-size:.8rem;font-weight:700;border-radius:6px;padding:3px 8px;background:var(--red);color:#fff;white-space:nowrap}
+.pp i{font-style:normal;font-size:.65rem;opacity:.85;margin-right:4px}
+.note{color:var(--mut);font-size:.82rem;margin:6px 0}
+.cta{display:inline-block;margin-top:10px;padding:10px 16px;border-radius:10px;background:var(--gold);color:#111;font-weight:700;text-decoration:none}
+footer{max-width:640px;margin:auto;padding:0 18px 30px;color:var(--mut);font-size:.8rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><h1>Menu</h1><p class="note">Prix en dirhams (DH).</p></header>
+<nav id="nav"></nav>
+<main id="m"></main>
+<script>
+var X="—";
+var S=[
+["boissons","Boissons chaudes",[["Expresso","",17],["Thé à la menthe","",18],["Café crème","",19],["Café Ness Ness","",19],["Café américain","",19],["Chocolat chaud","",19],["Chocolat fondu","",24],["Lait au chocolat","",19],["Lait chaud","",17],["Expresso macchiato","",20],["Caramel macchiato","",24],["Ice coffee","",23],["Cappuccino","",24],["Tisane","Verveine, thym, menthe pouliot",18]]],
+["jus","Jus",[["Jus d'orange","",20],["Jus de banane","",20],["Jus de pomme","",20],["Jus de fraise","",28],["Jus de mangue","",30],["Jus d'ananas","",30],["Panaché","",32],["Jus d'avocat","",30],["Jus d'avocat fruits secs","",35]]],
+["detox","Détox",[["Verre classique","Citron, gingembre, concombre",30],["Drainant","Carotte, orange, gingembre, pomme",30],["Foie","Betterave, pomme, céleri, citron",30]]],
+["mojitos","Mojitos",[["Mojito classic","",25],["Mojito tropical","",30],["Red mojito","",30],["Blue sky","",35]]],
+["cocktails","Cocktails",[["Piña colada","Lait de coco, ananas, piña colada, orange",35],["Berry","Fraise, framboise, myrtilles, orange",35],["Blue Hawaï","Ananas, blue curaçao, lait de coco, orange",35],["Passion","Ananas, mangue, fruit de la passion, orange",40],["Bora Bora","Ananas, citron, grenadine, orange",40]]],
+["shakes","Milk-shakes",[["Fraise","",35],["Chocolat","",35],["Vanille","",35]],"Suppléments : Oreo, Kitkat, Twix, Mars, Milka (+10 DH)"],
+["eaux","Eaux & sodas",[["Sidi Ali 33 cl","",6],["Sidi Ali 1,5 l","",15],["Soda","",18]]],
+["petitdej","Petits déjeuners",[["Classique","Omelette nature, panier de pain, fromage blanc, huile d'olive, jus d'orange, boisson chaude",35],["Espagnol","Pain grillé, fromage blanc, tortilla, purée de tomate, jus d'orange, boisson chaude",43],["Marocain","Tajine d'œufs au khliaa, panier de pain, miel, beurre, huile d'olive, jus d'orange, boisson chaude",48]]]
+];
+var B=[
+["Classic burger","Bœuf, cheddar, laitue, cornichons, tomate, oignon, sauce, ketchup, moutarde",55,69],
+["Oklahoma burger","Bœuf, onion rings, oignon caramélisé, cheddar, cornichons, sauce originale",55,69],
+["Swiss mushroom burger","Bœuf, champignons sautés, fromage suisse, cornichons, oignon, sauce truffe",65,79],
+["BBQ burger","Bœuf, cheddar, oignon caramélisé, cornichons, tomate, laitue, sauce BBQ",60,74],
+["Spicy jalapeño burger","Bœuf, jalapeños, fromage pimenté, tomate, oignon, laitue, sauce dragon",60,74],
+["Chicken burger","Poulet croustillant, tomates, cornichons, laitue, oignons, sauce ail vert",45,59]];
+var P=[
+["Classic smashburger","2 smash patties, cheddar, laitue, cornichons, tomate, oignon, sauce",61,75],
+["Oklahoma smash","2 smash patties, oignon croustillant, oignon caramélisé, cheddar, cornichons, sauce originale",61,75],
+["Spicy jalapeño smash","2 smash patties, jalapeños, cheddar, tomate, oignon, laitue, sauce dragon",66,80],
+["Swiss mushroom smash","2 smash patties, champignons sautés, fromage suisse, cornichons, oignon, sauce truffe",71,85],
+["Barbecue smash","2 smash patties, cheddar, oignon caramélisé, cornichons, tomate, laitue, sauce BBQ",66,80],
+["Cheeseburger","1 patty de bœuf, cheddar, cornichons, ketchup, moutarde",29,43]];
+var SD=[["Chili cheese nuggets (5 pcs)",30],["Mozzarella sticks (4 pcs)",35],["Onion rings (6 pcs)",25],["Frites classiques",15],["Chili cheese fries",29],["Burger-style chili cheese fries",45]];
+var EX=[["Patty poulet",15],["Patty bœuf",20],["Smash patty",10],["Fromage",5],["Tranche de jambon",5],["Sauce",5]];
+var DR=[["Pepsi 33 cl",10],["7Up 33 cl",10],["Sidi Ali 33 cl",6]];
+function it(n,d,p){return '<div class="it"><div class="n"><b>'+n+'</b>'+(d?'<small>'+d+'</small>':'')+'</div><div class="p">'+p+(p===X?'':' DH')+'</div></div>'}
+function bu(a){return a.map(function(r){return '<div class="it"><div class="n"><b>'+r[0]+'</b><small>'+r[1]+'</small></div><div class="pp"><span><i>Burger</i>'+r[2]+'</span><span><i>Combo</i>'+r[3]+'</span></div></div>'}).join('')}
+function ls(a){return a.map(function(r){return it(r[0],'',r[1])}).join('')}
+var ORD=["petitdej","boissons","shakes","eaux","jus","cocktails","mojitos","detox"];S.sort(function(a,b){return ORD.indexOf(a[0])-ORD.indexOf(b[0])});var h='',nv='';
+S.forEach(function(s){nv+='<a href="#'+s[0]+'">'+s[1]+'</a>';h+='<section id="'+s[0]+'"><h2>'+s[1]+'</h2>'+s[2].map(function(r){return it(r[0],r[1],r[2])}).join('')+(s[3]?'<p class="note">'+s[3]+'</p>':'')+'</section>'});
+var bz='<section id="burger"><h2>Burger Lab Marrakech</h2><p class="note">Combo : +14 DH (frites, Pepsi 33 cl et sauce dip).</p><h3>Burgers classiques</h3>'+bu(B)+'<h3>Smash burgers (pain brioché premium)</h3>'+bu(P)+'<h3>Accompagnements</h3>'+ls(SD)+'<h3>Suppléments</h3>'+ls(EX)+'<h3>Boissons</h3>'+ls(DR)+'<h3>Sauces (5 DH) : dragon, truffe, BRC, ail vert, originale</h3><a class="cta" href="tel:+212773733388">Commander : 07 73 73 33 88</a></section>';nv='<a href="#burger">Burger Lab</a>'+nv;h=bz+h;
+document.getElementById('nav').innerHTML=nv;document.getElementById('m').innerHTML=h;
+</script>
+</body>
+</html>
